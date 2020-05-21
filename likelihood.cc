@@ -18,6 +18,15 @@ long double prob(std::vector<int> daten, double mu) {
   return P;
 }
 
+long double prob1(std::vector<int> daten) {
+  using namespace std;
+  long double P = 1;
+  for (int k: daten) {
+    P *= poisson(k, k);
+  }
+  return P;
+}
+
 int main() {
     using namespace std;
 
@@ -41,13 +50,22 @@ int main() {
       nll << i << " " << -2*log(prob(daten, i)) << endl;
       anll << i << " " << -2*log(prob(daten, i)) + 2*log(prob(daten, 3.11538)) << endl;
     }  
+    
+    cout << "Zu 2a = " << prob(daten , 3.11538) << endl;
 
+    long double quotient = prob(daten, 3.11538)/prob1(daten);
+
+    cout << "Quotient = " << quotient << endl;
+    
+    long double z = (-2 * log(quotient) - 233) / sqrt(2 * 233);
+
+    cout << "z = " << z << endl;
     
     fin.close();
     lin.close();
     nll.close();
+    anll.close();
 
-    cout << prob(daten , 3.11538) << endl;
 
    //bester mu-Wert bei 2b und d: ca. 3.115
    //Intervall mit mu<1 ca. (3.001-3.235)

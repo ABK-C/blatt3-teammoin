@@ -56,6 +56,8 @@ int main() {
     long double quotient = prob(daten, 3.11538)/prob1(daten);
 
     cout << "Quotient = " << quotient << endl;
+  
+    cout << "-ln(\u039B) = " << -2*log(quotient) << endl;
     
     long double z = (-2 * log(quotient) - 233) / sqrt(2 * 233);
 
